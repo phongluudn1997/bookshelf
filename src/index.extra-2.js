@@ -23,10 +23,10 @@ function LoginForm({onSubmit, buttonText}) {
       </div>
       <div>
         <label htmlFor="password">Password</label>
-        <input id="password" type="password" />
+        <input id="password" type="password" autoComplete="current-password" />
       </div>
       <div>
-        <button type="submit">{buttonText}</button>
+        <input type="submit" value="Login" />
       </div>
     </form>
   )

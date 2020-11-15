@@ -1,9 +1,54 @@
-// 🐨 you'll need to import React and ReactDOM up here
+import * as React from 'react'
+import ReactDOM from 'react-dom'
+import '@reach/dialog/styles.css'
 
-// 🐨 you'll also need to import the Logo component from './components/logo'
+import {Dialog} from '@reach/dialog'
+import {Logo} from './components/logo'
 
-// 🐨 create an App component here and render the logo, the title ("Bookshelf"), a login button, and a register button.
-// 🐨 for fun, you can add event handlers for both buttons to alert that the button was clicked
+function App() {
+  const [modal, setModal] = React.useState('none')
+  const handleSubmit = ({username, password}) => {
+    console.log(username, password)
+  }
+  return (
+    <>
+      <Logo />
+      <h1>Bookshelf</h1>
+      <div>
+        <button onClick={() => setModal('login')}>Login</button>
+      </div>
+      <div>
+        <button onClick={() => setModal('register')}>Register</button>
+      </div>
+      <Dialog aria-label={modal} isOpen={modal !== 'none'}>
+        <button onClick={() => setModal('none')}>Close</button>
+        <h3>{modal.toLocaleLowerCase()}</h3>
+        <LoginForm buttonText={modal} onSubmit={handleSubmit} />
+      </Dialog>
+    </>
+  )
+}
 
-// 🐨 use ReactDOM to render the <App /> to the root element
-// 💰 find the root element with: document.getElementById('root')
+function LoginForm({onSubmit, buttonText}) {
+  const handleSubmit = e => {
+    e.preventDefault()
+    const {username, password} = e.target.elements
+    onSubmit({username: username.value, password: password.value})
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Username
+        <input id="username" type="text" autoComplete="username" />
+      </label>
+      <label>
+        Password
+        <input id="password" type="password" autoComplete="current-password" />
+      </label>
+      <input type="submit" value={buttonText} />
+    </form>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
