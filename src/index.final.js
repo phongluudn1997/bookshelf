@@ -6,46 +6,46 @@ import '@reach/dialog/styles.css'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import {Button, Input, FormGroup} from './components/lib'
-import {Modal, ModalContents, ModalOpenButton} from './components/modal'
 import {Logo} from './components/logo'
+import {Modal, ModalContents, ModalOpenButton} from './components/modal'
 
-function LoginForm({onSubmit, submitButton}) {
-  function handleSubmit(event) {
-    event.preventDefault()
-    const {username, password} = event.target.elements
+// function LoginForm({onSubmit, submitButton}) {
+//   function handleSubmit(event) {
+//     event.preventDefault()
+//     const {username, password} = event.target.elements
 
-    onSubmit({
-      username: username.value,
-      password: password.value,
-    })
-  }
+//     onSubmit({
+//       username: username.value,
+//       password: password.value,
+//     })
+//   }
 
-  return (
-    <form
-      css={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        '> div': {
-          margin: '10px auto',
-          width: '100%',
-          maxWidth: '300px',
-        },
-      }}
-      onSubmit={handleSubmit}
-    >
-      <FormGroup>
-        <label htmlFor="username">Username</label>
-        <Input id="username" />
-      </FormGroup>
-      <FormGroup>
-        <label htmlFor="password">Password</label>
-        <Input id="password" type="password" />
-      </FormGroup>
-      <div>{React.cloneElement(submitButton, {type: 'submit'})}</div>
-    </form>
-  )
-}
+//   return (
+//     <form
+//       css={{
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'stretch',
+//         '> div': {
+//           margin: '10px auto',
+//           width: '100%',
+//           maxWidth: '300px',
+//         },
+//       }}
+//       onSubmit={handleSubmit}
+//     >
+//       <FormGroup>
+//         <label htmlFor="username">Username</label>
+//         <Input id="username" />
+//       </FormGroup>
+//       <FormGroup>
+//         <label htmlFor="password">Password</label>
+//         <Input id="password" type="password" />
+//       </FormGroup>
+//       <div>{React.cloneElement(submitButton, {type: 'submit'})}</div>
+//     </form>
+//   )
+// }
 
 function App() {
   function login(formData) {
@@ -67,7 +67,7 @@ function App() {
         height: '100vh',
       }}
     >
-      <Logo width="80" height="80" />
+      {/* <Logo width="80" height="80" />
       <h1>Bookshelf</h1>
       <div
         css={{
@@ -98,7 +98,7 @@ function App() {
             />
           </ModalContents>
         </Modal>
-      </div>
+      </div> */}
     </div>
   )
 }
