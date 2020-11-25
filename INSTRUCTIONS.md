@@ -23,12 +23,11 @@ We can drastically simplify our UI state management if we split out the server
 cache into something separate.
 
 A fantastic solution for managing the server cache on the client is
-[`react-query`](https://react-query.tanstack.com/). It is a set of
-React hooks that allow you to query, cache, and mutate data on your server in a
-way that's flexible to support many use cases and optimizations but opinionated
-enough to provide a huge amount of value. And thanks to the power of hooks, we
-can build our own hooks on top of those provided to keep our component code
-really simple.
+[`react-query`](https://react-query.tanstack.com/). It is a set of React hooks
+that allow you to query, cache, and mutate data on your server in a way that's
+flexible to support many use cases and optimizations but opinionated enough to
+provide a huge amount of value. And thanks to the power of hooks, we can build
+our own hooks on top of those provided to keep our component code really simple.
 
 Here are a few examples of how you can use react-query that are relevant for our
 exercise:
@@ -97,14 +96,14 @@ credit will really simplify things for you!
 
 ### Files
 
-- `src/components/status-buttons.js`
-- `src/components/book-row.js`
-- `src/components/rating.js`
-- `src/screens/discover.js`
-- `src/screens/book.js`
-- `src/components/list-item-list.js`,
-- `src/app.js`
-- `src/utils/api-client.js`
+<!-- - `src/components/status-buttons.js` -->
+<!-- - `src/components/book-row.js` -->
+<!-- - `src/components/rating.js` -->
+<!-- - `src/screens/discover.js` -->
+<!-- - `src/screens/book.js` -->
+<!-- - `src/components/list-item-list.js`, -->
+<!-- - `src/app.js` -->
+<!-- - `src/utils/api-client.js` -->
 
 ## Extra Credit
 
@@ -112,10 +111,11 @@ credit will really simplify things for you!
 
 How are you enjoying all this repetition? No? Yeah, I'm not a big fan either.
 Here's where React hooks come in really handy! Let's make a few custom hooks.
-Here are a few ides:
+Here are a few ideas:
 
-- `useBook(bookId, user)`
-- `useBookSearch(query, user)`
+<!-- - `useBook(bookId, user)` -->
+<!-- - `useBookSearch(query, user)` -->
+
 - `useListItem(user, bookId)`
 - `useListItems(user)`
 - `useUpdateListItem(user)`
@@ -129,12 +129,12 @@ data.
 
 - `src/utils/books.js`
 - `src/utils/list-items.js`
-- `src/components/status-buttons.js`
-- `src/components/rating.js`
-- `src/components/book-row.js`
-- `src/screens/discover.js`
-- `src/screens/book.js`
-- `src/components/list-item-list.js`,
+  <!-- - `src/components/status-buttons.js` -->
+  <!-- - `src/components/rating.js` -->
+  <!-- - `src/components/book-row.js` -->
+  <!-- - `src/screens/discover.js` -->
+  <!-- - `src/screens/book.js` -->
+  <!-- - `src/components/list-item-list.js` -->
 
 ### 2. 💯 Wrap the <App /> in a <ReactQueryConfigProvider />
 
@@ -375,7 +375,8 @@ book is: `['book', {bookId}]`.
 
 📜 Here are some docs you might find helpful:
 
-- `queryCache.setQueryData`: https://react-query.tanstack.com/docs/api#querycachesetquerydata
+- `queryCache.setQueryData`:
+  https://react-query.tanstack.com/docs/api#querycachesetquerydata
 - `config.onSuccess`: https://react-query.tanstack.com/docs/api#usequery
 
 **Files:**
@@ -409,20 +410,20 @@ the notes textarea shows up instantly.
 about the following things:
 
 - `onMutate`, `onError` and `onSettled`:
-  https://react-query.tanstack.com/docs/api#usemutation
-  (use `onMutate` to make your optimistic update, use `onError` to restore the
-  original value, and use `onSettled` to trigger a refetch of all the
-  `list-items` to be sure you have the very latest data). NOTE: What you return
-  from `onMutate` will be the third argument received by `onError`.
+  https://react-query.tanstack.com/docs/api#usemutation (use `onMutate` to make
+  your optimistic update, use `onError` to restore the original value, and use
+  `onSettled` to trigger a refetch of all the `list-items` to be sure you have
+  the very latest data). NOTE: What you return from `onMutate` will be the third
+  argument received by `onError`.
 - `queryCache.invalidateQueries`:
   https://react-query.tanstack.com/docs/api#querycacheinvalidatequeries
 - `queryCache.getQueryData`:
-  https://react-query.tanstack.com/docs/api#querycachegetquerydata
-  (to get the data you'll restore in the event of an error)
+  https://react-query.tanstack.com/docs/api#querycachegetquerydata (to get the
+  data you'll restore in the event of an error)
 - `queryCache.setQueryData`:
-  https://react-query.tanstack.com/docs/api#querycachesetquerydata
-  (to set it to the optimistic version of the data and to restore the original
-  data if there's an error)
+  https://react-query.tanstack.com/docs/api#querycachesetquerydata (to set it to
+  the optimistic version of the data and to restore the original data if there's
+  an error)
 
 This one is definitely a challenge. It'll take you more than a few minutes to
 figure it out. I suggest you take your time and try and work it out though.
