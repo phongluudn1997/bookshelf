@@ -1,6 +1,10 @@
 import {queryCache, useMutation, useQuery} from 'react-query'
 import {client} from './api-client.exercise'
 
+const defaultMutationOptions = {
+  onSettled: () => queryCache.invalidateQueries('list-items'),
+}
+
 const useListItem = ({user, bookId}) => {
   const {data: listItems} = useListItems({user})
   return listItems?.find(li => li.bookId === bookId) ?? null
@@ -15,16 +19,16 @@ const useListItems = ({user}) => {
   return queryData
 }
 
-const useCreateListItem = ({bookId, user}) => {
+const useCreateListItem = (user, options) => {
   const mutate = useMutation(
     ({bookId}) =>
       client(`list-items`, {data: {bookId}, token: user.token, method: 'POST'}),
-    {onSettled: () => queryCache.invalidateQueries('list-items')},
+    {...defaultMutationOptions, ...options},
   )
   return mutate
 }
 
-const useUpdateListItem = ({user}) => {
+const useUpdateListItem = (user, options) => {
   const mutate = useMutation(
     updates =>
       client(`list-items/${updates.id}`, {
@@ -32,17 +36,15 @@ const useUpdateListItem = ({user}) => {
         token: user.token,
         method: 'PUT',
       }),
-    {
-      onSettled: () => queryCache.invalidateQueries('list-items'),
-    },
+    {...defaultMutationOptions, ...options},
   )
   return mutate
 }
 
-const useRemoveListItem = ({user}) => {
+const useRemoveListItem = (user, options) => {
   return useMutation(
     id => client(`list-items/${id}`, {method: 'DELETE', token: user.token}),
-    {onSettled: () => queryCache.invalidateQueries('list-items')},
+    {...defaultMutationOptions, ...options},
   )
 }
 
