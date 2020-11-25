@@ -27,9 +27,9 @@ const loadingBook = {
 
 function BookScreen({user}) {
   const {bookId} = useParams()
-  const {data} = useBook({bookId, user})
+  const data = useBook({bookId, user})
 
-  const book = data?.book ?? loadingBook
+  const book = data ?? loadingBook
   const listItem = useListItem({user, bookId: book.id})
 
   const {title, author, coverImageUrl, publisher, synopsis} = book
