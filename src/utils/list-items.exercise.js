@@ -1,5 +1,6 @@
 import {queryCache, useMutation, useQuery} from 'react-query'
 import {client} from './api-client.exercise'
+import {setQueryDataForBook} from './books.exercise'
 
 const defaultMutationOptions = {
   onSettled: () => queryCache.invalidateQueries('list-items'),
@@ -15,6 +16,11 @@ const useListItems = ({user}) => {
     queryKey: 'list-items',
     queryFn: () =>
       client('list-items', {token: user.token}).then(data => data.listItems),
+    config: {
+      onSuccess(listItems) {
+        listItems.forEach(li => setQueryDataForBook(li.book))
+      },
+    },
   })
   return queryData
 }

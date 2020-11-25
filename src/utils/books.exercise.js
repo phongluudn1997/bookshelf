@@ -27,7 +27,6 @@ const useBook = ({bookId, user}) => {
     queryFn: () =>
       client(`books/${bookId}`, {token: user.token}).then(data => data.book),
   })
-  console.log(data)
   return data
 }
 
@@ -40,4 +39,4 @@ const setQueryDataForBook = book => {
   queryCache.setQueryData(['book', {bookId: book.id}], book)
 }
 
-export {useBook, useBookSearch, refetchBookSearchQuery}
+export {useBook, useBookSearch, refetchBookSearchQuery, setQueryDataForBook}
