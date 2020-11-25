@@ -1,5 +1,5 @@
-const {useQuery} = require('react-query')
-const {client} = require('./api-client.exercise')
+import {client} from './api-client.exercise'
+import {useQuery, queryCache} from 'react-query'
 
 const useBook = ({bookId, user}) => {
   const dataQuery = useQuery({
@@ -9,15 +9,22 @@ const useBook = ({bookId, user}) => {
   return dataQuery
 }
 
+const getBookSearchConfig = (query, user) => ({
+  queryKey: ['bookSearch', {query}],
+  queryFn: () =>
+    client(`books?query=${encodeURIComponent(query)}`, {
+      token: user.token,
+    }).then(data => data.books),
+})
+
 const useBookSearch = ({query, user}) => {
-  const dataQuery = useQuery({
-    queryKey: ['bookSearch', {query}],
-    queryFn: () =>
-      client(`books?query=${encodeURIComponent(query)}`, {
-        token: user.token,
-      }).then(data => data.books),
-  })
+  const dataQuery = useQuery(getBookSearchConfig(query, user))
   return dataQuery
 }
 
-export {useBook, useBookSearch}
+const refetchBookSearchQuery = async user => {
+  queryCache.removeQueries('bookSearch')
+  await queryCache.prefetchQuery(getBookSearchConfig('', user))
+}
+
+export {useBook, useBookSearch, refetchBookSearchQuery}
